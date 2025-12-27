@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Visionary Directors (2014-2024)</title>
+    <title>Cinema's Greatest: The Last 70 Years</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div id="app">
         <header class="app-header">
-            <h1>Visionary Directors</h1>
-            <p>An interactive exploration of cinema's most profound voices from the last decade.</p>
+            <h1>Cinema's Greatest</h1>
+            <p>A 70-year journey through the visionaries who defined the language of film (1954–2024).</p>
         </header>
 
         <nav class="tabs">
-            <button id="timeline-tab" class="tab-btn active">Timeline (Debut)</button>
-            <button id="categories-tab" class="tab-btn">Themes & Genres</button>
-            <button id="graph-tab" class="tab-btn">Influence Map</button>
+            <button id="timeline-tab" class="tab-btn active">Chronological Timeline</button>
+            <button id="categories-tab" class="tab-btn">Themes & Movements</button>
+            <button id="graph-tab" class="tab-btn">The Influence Web</button>
         </nav>
 
         <main id="content">
@@ -41,13 +41,13 @@
                     <svg id="influence-graph" width="100%" height="100%"></svg>
                 </div>
                 <div class="graph-instructions">
-                    <p>Click a node to view details. Drag nodes to rearrange the network.</p>
+                    <p>Click a node to explore. Drag to rearrange history.</p>
                 </div>
             </div>
         </main>
     </div>
 
-    <div id="philosopher-modal" class="modal-overlay">
+    <div id="director-modal" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close-btn" id="modal-close-btn">×</button>
             <div id="modal-body">
