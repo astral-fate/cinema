@@ -3,25 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cinema's Greatest: The Last 70 Years</title>
+    <title>Global Cinema Archive (1950–2024)</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:ital,wght@0,300;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div id="app">
         <header class="app-header">
-            <h1>Cinema's Greatest</h1>
-            <p>A 70-year journey through the visionaries who defined the language of film (1954–2024).</p>
+            <h1>Global Cinema Archive</h1>
+            <p>A comprehensive atlas of 100+ filmmakers from the Arab World, Asia, Africa, Europe, and the Americas.</p>
         </header>
 
-        <nav class="tabs">
-            <button id="timeline-tab" class="tab-btn active">Chronological Timeline</button>
-            <button id="categories-tab" class="tab-btn">Themes & Movements</button>
-            <button id="graph-tab" class="tab-btn">The Influence Web</button>
-        </nav>
+        <div class="controls">
+            <nav class="tabs">
+                <button id="timeline-tab" class="tab-btn active">Chronological</button>
+                <button id="categories-tab" class="tab-btn">Region & Movement</button>
+                <button id="graph-tab" class="tab-btn">Influence Map</button>
+            </nav>
+            <input type="text" id="search-input" placeholder="Search director, country, or film..." class="search-bar">
+        </div>
 
         <main id="content">
             <div id="timeline-view" class="view active">
@@ -41,7 +44,7 @@
                     <svg id="influence-graph" width="100%" height="100%"></svg>
                 </div>
                 <div class="graph-instructions">
-                    <p>Click a node to explore. Drag to rearrange history.</p>
+                    <p>Drag nodes to explore the connections between global cinema traditions.</p>
                 </div>
             </div>
         </main>
