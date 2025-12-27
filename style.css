@@ -1,61 +1,242 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cinema's Greatest: The Last 70 Years</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-</head>
-<body>
+:root {
+    --primary-color: #c084fc; /* Global Purple */
+    --secondary-color: #38bdf8; /* Ocean Blue */
+    --accent-color: #fbbf24; /* Amber Gold */
+    --background-color: #0f172a; /* Slate 900 */
+    --card-bg-color: #1e293b; /* Slate 800 */
+    --text-color: #f1f5f9; /* Slate 100 */
+    --muted-text: #94a3b8; /* Slate 400 */
+    --border-color: #334155; /* Slate 700 */
+    
+    --font-sans: 'Inter', sans-serif;
+    --font-serif: 'Merriweather', serif;
+}
 
-    <div id="app">
-        <header class="app-header">
-            <h1>Cinema's Greatest</h1>
-            <p>A 70-year journey through the visionaries who defined the language of film (1954–2024).</p>
-        </header>
+body {
+    font-family: var(--font-sans);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.5;
+}
 
-        <nav class="tabs">
-            <button id="timeline-tab" class="tab-btn active">Chronological Timeline</button>
-            <button id="categories-tab" class="tab-btn">Themes & Movements</button>
-            <button id="graph-tab" class="tab-btn">The Influence Web</button>
-        </nav>
+#app {
+    max-width: 1400px; /* Wider for more content */
+    margin: 0 auto;
+    padding: 2rem;
+}
 
-        <main id="content">
-            <div id="timeline-view" class="view active">
-                <div class="timeline-container">
-                    <div id="timeline-content" class="timeline-content">
-                        </div>
-                </div>
-            </div>
+/* Header */
+.app-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 2rem;
+}
 
-            <div id="categories-view" class="view">
-                <div id="categories-grid" class="categories-grid">
-                    </div>
-            </div>
+.app-header h1 {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    color: var(--text-color);
+    margin: 0 0 0.5rem;
+}
 
-            <div id="graph-view" class="view">
-                <div id="graph-container" class="graph-container">
-                    <svg id="influence-graph" width="100%" height="100%"></svg>
-                </div>
-                <div class="graph-instructions">
-                    <p>Click a node to explore. Drag to rearrange history.</p>
-                </div>
-            </div>
-        </main>
-    </div>
+.app-header p {
+    color: var(--muted-text);
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
 
-    <div id="director-modal" class="modal-overlay">
-        <div class="modal-content">
-            <button class="modal-close-btn" id="modal-close-btn">×</button>
-            <div id="modal-body">
-                </div>
-        </div>
-    </div>
+/* Controls & Search */
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
 
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+.tabs {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--muted-text);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.tab-btn:hover, .tab-btn.active {
+    background: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}
+
+.search-bar {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg-color);
+    color: var(--text-color);
+    width: 300px;
+    font-size: 0.95rem;
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Views */
+.view { display: none; }
+.view.active { display: block; }
+
+/* Timeline Layout - Optimized for Density */
+.timeline-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+}
+
+/* We are moving away from the "line" timeline to a "Card Grid" sorted chronologically for density */
+.timeline-card {
+    background: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.timeline-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--secondary-color);
+}
+
+.card-meta {
+    font-size: 0.8rem;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.timeline-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem;
+    color: #fff;
+}
+
+.card-works {
+    font-size: 0.85rem;
+    color: var(--muted-text);
+    font-style: italic;
+    margin-top: auto;
+}
+
+/* Category View */
+.categories-grid {
+    column-count: 3; /* Masonry-like layout */
+    column-gap: 1.5rem;
+}
+
+.category-group {
+    break-inside: avoid;
+    background: var(--card-bg-color);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+}
+
+.category-group h3 {
+    margin-top: 0;
+    color: var(--secondary-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.director-link {
+    display: block;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-between;
+}
+
+.director-link:hover { color: var(--primary-color); }
+.director-link span.nat { opacity: 0.5; font-size: 0.8em; }
+
+/* Graph */
+.graph-container {
+    height: 75vh;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: #0b1120;
+}
+.graph-instructions { text-align: center; color: var(--muted-text); margin-top: 0.5rem; }
+
+/* Modal */
+.modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 1000; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+    backdrop-filter: blur(5px);
+}
+.modal-overlay.show { opacity: 1; pointer-events: auto; }
+
+.modal-content {
+    background: var(--card-bg-color);
+    width: 90%; max-width: 600px;
+    max-height: 90vh; overflow-y: auto;
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+}
+
+.modal-close-btn {
+    position: absolute; top: 1rem; right: 1rem;
+    background: none; border: none; color: var(--muted-text);
+    font-size: 1.5rem; cursor: pointer;
+}
+
+.modal-header h2 { font-family: var(--font-serif); font-size: 2rem; margin: 0; color: var(--primary-color); }
+.modal-badges { display: flex; gap: 0.5rem; margin: 0.5rem 0 1.5rem; flex-wrap: wrap; }
+.badge { padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; background: rgba(255,255,255,0.1); color: var(--text-color); }
+.badge.nat { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
+.badge.era { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+
+.modal-body h4 { color: var(--muted-text); text-transform: uppercase; font-size: 0.8rem; margin: 1.5rem 0 0.5rem; letter-spacing: 1px; }
+.modal-body p { margin: 0; font-size: 1rem; line-height: 1.6; }
+
+@media (max-width: 900px) {
+    .categories-grid { column-count: 2; }
+}
+@media (max-width: 600px) {
+    .categories-grid { column-count: 1; }
+    .timeline-container { grid-template-columns: 1fr; }
+}
