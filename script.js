@@ -1,476 +1,248 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- The Dataset (1954 - 2024) ---
+
+    // --- The Global Cinema Database ---
+    // A comprehensive list covering diverse regions and movements.
     const directors = [
-        // --- 1950s & 60s Era ---
-        {
-            id: 101,
-            name: "Alfred Hitchcock",
-            nationality: "UK / USA",
-            activeEra: "1920s - 1970s",
-            debutYear: 1954, // Using 'Rear Window' as the start of his golden run for this timeline
-            bio: "The Master of Suspense. He pioneered many techniques in the suspense and psychological thriller genres, making the camera move in a way that mimics a person's gaze.",
-            themes: "Voyeurism, wrongful accusation, blonde icy women, suspense.",
-            works: "Vertigo (1958), Psycho (1960), Rear Window (1954)",
-            influence: "Brian De Palma, David Fincher, Bong Joon-ho",
-            category: "Classic Masters",
-            wiki: "https://en.wikipedia.org/wiki/Alfred_Hitchcock"
-        },
-        {
-            id: 102,
-            name: "Akira Kurosawa",
-            nationality: "Japan",
-            activeEra: "1940s - 1990s",
-            debutYear: 1954, // Seven Samurai
-            bio: "A giant of cinema whose samurai epics and contemporary dramas redefined action editing and visual storytelling.",
-            themes: "Humanism, social disintegration, the samurai code, master-pupil relationships.",
-            works: "Seven Samurai (1954), Ran (1985), Rashomon (1950)",
-            influence: "George Lucas, Steven Spielberg, Sergio Leone",
-            category: "Classic Masters"
-        },
-        {
-            id: 103,
-            name: "Agnes Varda",
-            nationality: "France",
-            activeEra: "1950s - 2010s",
-            debutYear: 1955,
-            bio: "The grandmother of the French New Wave. Her work was distinctive for its realism, social commentary, and experimental style.",
-            themes: "Feminism, social realism, the passage of time, documentary blurring.",
-            works: "Cléo from 5 to 7 (1962), Vagabond (1985), Faces Places (2017)",
-            influence: "Greta Gerwig, Celine Sciamma, Barry Jenkins",
-            category: "French New Wave & Experimental"
-        },
-        {
-            id: 104,
-            name: "Stanley Kubrick",
-            nationality: "USA / UK",
-            activeEra: "1950s - 1990s",
-            debutYear: 1956,
-            bio: "Known for his perfectionism, slow pacing, and striking visual compositions. He worked across almost every genre, mastering each one.",
-            themes: "Dehumanization, war, artificial intelligence, human folly.",
-            works: "2001: A Space Odyssey (1968), The Shining (1980), Dr. Strangelove (1964)",
-            influence: "Christopher Nolan, Paul Thomas Anderson, Yorgos Lanthimos",
-            category: "Classic Masters"
-        },
-        {
-            id: 105,
-            name: "Jean-Luc Godard",
-            nationality: "France / Switzerland",
-            activeEra: "1960s - 2020s",
-            debutYear: 1960,
-            bio: "A pioneer of the French New Wave who broke every rule of cinema—jump cuts, breaking the fourth wall, and political radicalism.",
-            themes: "Existentialism, Marxism, consumer culture, the medium of film itself.",
-            works: "Breathless (1960), Contempt (1963), Pierrot le Fou (1965)",
-            influence: "Quentin Tarantino, Wong Kar-wai, Martin Scorsese",
-            category: "French New Wave & Experimental"
-        },
+        // --- ARAB WORLD & MIDDLE EAST ---
+        { id: 1, name: "Youssef Chahine", nat: "Egypt", era: "1950s-2000s", works: "Cairo Station, The Land", region: "Arab World", theme: "Social realism, Post-colonial identity" },
+        { id: 2, name: "Abbas Kiarostami", nat: "Iran", era: "1970s-2010s", works: "Taste of Cherry, Close-Up", region: "Middle East", theme: "Poetic realism, Meta-fiction" },
+        { id: 3, name: "Nadine Labaki", nat: "Lebanon", era: "2000s-Present", works: "Capernaum, Caramel", region: "Arab World", theme: "Women's rights, Childhood poverty" },
+        { id: 4, name: "Elia Suleiman", nat: "Palestine", era: "1990s-Present", works: "Divine Intervention, It Must Be Heaven", region: "Arab World", theme: "Silent comedy, Political absurdism" },
+        { id: 5, name: "Asghar Farhadi", nat: "Iran", era: "2000s-Present", works: "A Separation, The Salesman", region: "Middle East", theme: "Moral complexity, Domestic drama" },
+        { id: 6, name: "Hany Abu-Assad", nat: "Palestine", era: "2000s-Present", works: "Paradise Now, Omar", region: "Arab World", theme: "Occupation, Human cost of conflict" },
+        { id: 7, name: "Haifaa al-Mansour", nat: "Saudi Arabia", era: "2010s-Present", works: "Wadjda, The Perfect Candidate", region: "Arab World", theme: "Female empowerment, Cultural change" },
+        { id: 8, name: "Nuri Bilge Ceylan", nat: "Turkey", era: "1990s-Present", works: "Winter Sleep, Once Upon a Time in Anatolia", region: "Middle East", theme: "Existentialism, Chekhovian dialogue" },
+        { id: 9, name: "Kaouther Ben Hania", nat: "Tunisia", era: "2010s-Present", works: "The Man Who Sold His Skin", region: "Arab World", theme: "Refugee crisis, Art vs Humanity" },
+        { id: 10, name: "Maroun Bagdadi", nat: "Lebanon", era: "1970s-1990s", works: "Little Wars, Out of Life", region: "Arab World", theme: "Civil war, Memory" },
 
-        // --- 1970s New Hollywood & Global Voices ---
-        {
-            id: 201,
-            name: "Francis Ford Coppola",
-            nationality: "USA",
-            activeEra: "1960s - Present",
-            debutYear: 1972,
-            bio: "A central figure of the New Hollywood wave, turning the gangster genre into an operatic tragedy.",
-            themes: "Family, corruption, the American Dream, absolute power.",
-            works: "The Godfather (1972), Apocalypse Now (1979), The Conversation (1974)",
-            influence: "Paul Thomas Anderson, David Chase, Sofia Coppola",
-            category: "New Hollywood"
-        },
-        {
-            id: 202,
-            name: "Martin Scorsese",
-            nationality: "USA",
-            activeEra: "1960s - Present",
-            debutYear: 1973, // Mean Streets
-            bio: "The ultimate cinephile director, blending gritty realism with stylized violence and rock soundtracks.",
-            themes: "Catholic guilt, organized crime, masculinity, New York City.",
-            works: "Taxi Driver (1976), Goodfellas (1990), The Wolf of Wall Street (2013)",
-            influence: "Paul Thomas Anderson, Bong Joon-ho, Quentin Tarantino",
-            category: "New Hollywood"
-        },
-        {
-            id: 203,
-            name: "Steven Spielberg",
-            nationality: "USA",
-            activeEra: "1970s - Present",
-            debutYear: 1975, // Jaws
-            bio: "The inventor of the modern blockbuster. He possesses an innate understanding of audience emotion and visual wonder.",
-            themes: "Childhood wonder, absent fathers, war, survival.",
-            works: "Jaws (1975), Raiders of the Lost Ark (1981), Schindler's List (1993)",
-            influence: "J.J. Abrams, Denis Villeneuve, M. Night Shyamalan",
-            category: "Blockbuster Visionaries"
-        },
-        {
-            id: 204,
-            name: "Andrei Tarkovsky",
-            nationality: "USSR",
-            activeEra: "1960s - 1980s",
-            debutYear: 1972, // Solaris (International fame)
-            bio: "A Russian filmmaker known for his 'sculpting in time' theory, creating slow, poetic, and metaphysical films.",
-            themes: "Memory, spirituality, nature, the human soul.",
-            works: "Solaris (1972), Stalker (1979), The Mirror (1975)",
-            influence: "Claire Denis, Alejandro Iñárritu, Christopher Nolan",
-            category: "Poetic Realism"
-        },
+        // --- INDIA & SOUTH ASIA ---
+        { id: 11, name: "Satyajit Ray", nat: "India", era: "1950s-1990s", works: "Pather Panchali, Charulata", region: "India", theme: "Humanism, Bengali rural life" },
+        { id: 12, name: "Ritwik Ghatak", nat: "India", era: "1950s-1970s", works: "Meghe Dhaka Tara, Subarnarekha", region: "India", theme: "Partition trauma, Displacement" },
+        { id: 13, name: "Guru Dutt", nat: "India", era: "1950s-1960s", works: "Pyaasa, Kaagaz Ke Phool", region: "India", theme: "Melancholy, The tortured artist" },
+        { id: 14, name: "Mani Ratnam", nat: "India", era: "1980s-Present", works: "Dil Se.., Nayakan", region: "India", theme: "Terrorism trilogy, Political romance" },
+        { id: 15, name: "S.S. Rajamouli", nat: "India", era: "2000s-Present", works: "RRR, Baahubali", region: "India", theme: "Mythic spectacle, Anti-colonialism" },
+        { id: 16, name: "Mira Nair", nat: "India/USA", era: "1980s-Present", works: "Salaam Bombay!, Monsoon Wedding", region: "India", theme: "Diaspora, Street life" },
+        { id: 17, name: "Anurag Kashyap", nat: "India", era: "2000s-Present", works: "Gangs of Wasseypur, Dev.D", region: "India", theme: "Crime, Gritty realism" },
+        { id: 18, name: "Zoya Akhtar", nat: "India", era: "2000s-Present", works: "Gully Boy, Zindagi Na Milegi Dobara", region: "India", theme: "Modern youth, Class aspirations" },
+        { id: 19, name: "Adoor Gopalakrishnan", nat: "India", era: "1970s-Present", works: "Elippathayam, Swayamvaram", region: "India", theme: "Kerala culture, Feudal decay" },
+        { id: 20, name: "Sanjay Leela Bhansali", nat: "India", era: "1990s-Present", works: "Devdas, Padmavat", region: "India", theme: "Grandeur, Operatic romance" },
 
-        // --- 1980s & 90s Auteurs ---
-        {
-            id: 301,
-            name: "Hayao Miyazaki",
-            nationality: "Japan",
-            activeEra: "1979 - Present",
-            debutYear: 1984, // Nausicaa
-            bio: "Co-founder of Studio Ghibli, a master of animation who creates pacifist, environmentalist fables with strong female leads.",
-            themes: "Environmentalism, flight, pacifism, childhood transition.",
-            works: "Spirited Away (2001), Princess Mononoke (1997), My Neighbor Totoro (1988)",
-            influence: "Guillermo del Toro, Wes Anderson, Pixar Studios",
-            category: "Animation & Fantasy"
-        },
-        {
-            id: 302,
-            name: "David Lynch",
-            nationality: "USA",
-            activeEra: "1970s - Present",
-            debutYear: 1986, // Blue Velvet
-            bio: "The surrealist of American suburbia. He exposes the nightmare hiding underneath the picket fence.",
-            themes: "Dreams, the uncanny, industrial decay, duality.",
-            works: "Blue Velvet (1986), Mulholland Drive (2001), Twin Peaks (1990)",
-            influence: "Ari Aster, Denis Villeneuve, Jordan Peele",
-            category: "Surrealism"
-        },
-        {
-            id: 303,
-            name: "Spike Lee",
-            nationality: "USA",
-            activeEra: "1980s - Present",
-            debutYear: 1989, // Do the Right Thing
-            bio: "A provacateur who confronts race relations in America with vibrant style, breaking the fourth wall, and the 'double dolly' shot.",
-            themes: "Race in America, systemic oppression, Brooklyn, media satire.",
-            works: "Do the Right Thing (1989), Malcolm X (1992), BlacKkKlansman (2018)",
-            influence: "Jordan Peele, Barry Jenkins, Ryan Coogler",
-            category: "Social Commentary"
-        },
-        {
-            id: 304,
-            name: "Wong Kar-wai",
-            nationality: "Hong Kong",
-            activeEra: "1980s - Present",
-            debutYear: 1994, // Chungking Express
-            bio: "The poet of urban loneliness. Known for step-printing, neon visuals, and non-linear romances.",
-            themes: "Unrequited love, memory, expiration dates, loneliness.",
-            works: "In the Mood for Love (2000), Chungking Express (1994), Fallen Angels (1995)",
-            influence: "Barry Jenkins, Sofia Coppola, Quentin Tarantino",
-            category: "Poetic Realism"
-        },
-        {
-            id: 305,
-            name: "Quentin Tarantino",
-            nationality: "USA",
-            activeEra: "1990s - Present",
-            debutYear: 1992,
-            bio: "The video store clerk turned auteur. He remixes pop culture, B-movies, and foreign cinema into dialogue-heavy masterpieces.",
-            themes: "Revenge, historical revisionism, feet, pop culture references.",
-            works: "Pulp Fiction (1994), Kill Bill (2003), Inglourious Basterds (2009)",
-            influence: "Edgar Wright, Bong Joon-ho",
-            category: "Post-Modernism"
-        },
+        // --- CHINA, TAIWAN, HONG KONG ---
+        { id: 21, name: "Wong Kar-wai", nat: "Hong Kong", era: "1980s-Present", works: "In the Mood for Love, Chungking Express", region: "East Asia", theme: "Time, Longing, Neon aesthetics" },
+        { id: 22, name: "Edward Yang", nat: "Taiwan", era: "1980s-2000s", works: "Yi Yi, A Brighter Summer Day", region: "East Asia", theme: "Urban alienation, Modernity" },
+        { id: 23, name: "Hou Hsiao-hsien", nat: "Taiwan", era: "1980s-Present", works: "City of Sadness, The Assassin", region: "East Asia", theme: "Long takes, Historical memory" },
+        { id: 24, name: "Zhang Yimou", nat: "China", era: "1980s-Present", works: "Raise the Red Lantern, Hero", region: "East Asia", theme: "Color theory, Historical oppression" },
+        { id: 25, name: "Ang Lee", nat: "Taiwan", era: "1990s-Present", works: "Crouching Tiger Hidden Dragon, Life of Pi", region: "East Asia", theme: "East-West culture clash, Repression" },
+        { id: 26, name: "Jia Zhangke", nat: "China", era: "1990s-Present", works: "Ash Is Purest White, Still Life", region: "East Asia", theme: "Rapid industrialization, Forgotten people" },
+        { id: 27, name: "Chen Kaige", nat: "China", era: "1980s-Present", works: "Farewell My Concubine", region: "East Asia", theme: "Cultural Revolution, Peking Opera" },
+        { id: 28, name: "Tsai Ming-liang", nat: "Taiwan", era: "1990s-Present", works: "Goodbye, Dragon Inn", region: "East Asia", theme: "Slow cinema, Isolation" },
+        { id: 29, name: "Stephen Chow", nat: "Hong Kong", era: "1990s-Present", works: "Kung Fu Hustle, Shaolin Soccer", region: "East Asia", theme: "Mo lei tau comedy, Underdog stories" },
+        { id: 30, name: "Ann Hui", nat: "Hong Kong", era: "1970s-Present", works: "A Simple Life, Boat People", region: "East Asia", theme: "Social issues, Migration" },
 
-        // --- 2000s to Present ---
-        {
-            id: 401,
-            name: "Christopher Nolan",
-            nationality: "UK / USA",
-            activeEra: "1998 - Present",
-            debutYear: 2000, // Memento
-            bio: "He turned the blockbuster into a puzzle. Known for shooting on IMAX film and obsessing over the concept of time.",
-            themes: "Time, identity, obsession, scale.",
-            works: "The Dark Knight (2008), Inception (2010), Oppenheimer (2023)",
-            influence: "Denis Villeneuve, Damien Chazelle",
-            category: "Blockbuster Visionaries"
-        },
-        {
-            id: 402,
-            name: "Bong Joon-ho",
-            nationality: "South Korea",
-            activeEra: "2000 - Present",
-            debutYear: 2003, // Memories of Murder
-            bio: "A master of genre-bending. He mixes slapstick comedy with brutal social horror seamlessly.",
-            themes: "Class warfare, incompetence of authority, family.",
-            works: "Parasite (2019), Memories of Murder (2003), The Host (2006)",
-            influence: "Jordan Peele, Adam McKay",
-            category: "Social Commentary"
-        },
-        {
-            id: 403,
-            name: "Denis Villeneuve",
-            nationality: "Canada",
-            activeEra: "2000s - Present",
-            debutYear: 2010, // Incendies (Global breakout)
-            bio: "The modern master of Sci-Fi. He brings a brutalist architecture and heavy atmosphere to large scale stories.",
-            themes: "Destiny, memory, language, brutalism.",
-            works: "Dune (2021), Arrival (2016), Sicario (2015)",
-            influence: "Chloé Zhao",
-            category: "Sci-Fi & Spectacle"
-        },
-        {
-            id: 404,
-            name: "Greta Gerwig",
-            nationality: "USA",
-            activeEra: "2008 - Present",
-            debutYear: 2017, // Lady Bird (Solo directing)
-            bio: "Moving from indie acting to directing massive hits, she explores the specific pains and joys of womanhood.",
-            themes: "Girlhood, ambition, mother-daughter bonds.",
-            works: "Lady Bird (2017), Little Women (2019), Barbie (2023)",
-            influence: "Noah Baumbach, Sofia Coppola",
-            category: "Modern Humanism"
-        },
-        {
-            id: 405,
-            name: "Jordan Peele",
-            nationality: "USA",
-            activeEra: "2010s - Present",
-            debutYear: 2017,
-            bio: " redefined the horror genre by blending classic scares with sharp racial and social satire.",
-            themes: "The 'Sunken Place', spectacle, hidden histories.",
-            works: "Get Out (2017), Nope (2022), Us (2019)",
-            influence: "Ari Aster, Emerald Fennell",
-            category: "Modern Horror"
-        }
+        // --- JAPAN ---
+        { id: 31, name: "Akira Kurosawa", nat: "Japan", era: "1940s-1990s", works: "Seven Samurai, Rashomon", region: "Japan", theme: "Samurai ethics, Humanism" },
+        { id: 32, name: "Yasujiro Ozu", nat: "Japan", era: "1920s-1960s", works: "Tokyo Story, Late Spring", region: "Japan", theme: "Family dissolution, The tatami shot" },
+        { id: 33, name: "Hayao Miyazaki", nat: "Japan", era: "1970s-Present", works: "Spirited Away, Princess Mononoke", region: "Japan", theme: "Pacifism, Environmentalism" },
+        { id: 34, name: "Hirokazu Kore-eda", nat: "Japan", era: "1990s-Present", works: "Shoplifters, Nobody Knows", region: "Japan", theme: "Non-traditional families, Child neglect" },
+        { id: 35, name: "Takeshi Kitano", nat: "Japan", era: "1980s-Present", works: "Hana-bi, Sonatine", region: "Japan", theme: "Yakuza violence, Deadpan humor" },
+        { id: 36, name: "Takashi Miike", nat: "Japan", era: "1990s-Present", works: "Audition, Ichi the Killer", region: "Japan", theme: "Extreme violence, Surrealism" },
+        { id: 37, name: "Ryusuke Hamaguchi", nat: "Japan", era: "2000s-Present", works: "Drive My Car, Wheel of Fortune and Fantasy", region: "Japan", theme: "Language, Theater, Connection" },
+        { id: 38, name: "Kenji Mizoguchi", nat: "Japan", era: "1920s-1950s", works: "Ugetsu, Sansho the Bailiff", region: "Japan", theme: "Women's suffering, Long takes" },
+        { id: 39, name: "Satoshi Kon", nat: "Japan", era: "1990s-2010", works: "Perfect Blue, Paprika", region: "Japan", theme: "Dreams vs Reality, Identity" },
+        { id: 40, name: "Naomi Kawase", nat: "Japan", era: "1990s-Present", works: "Sweet Bean, The Mourning Forest", region: "Japan", theme: "Nature, Grief, Documentary style" },
+
+        // --- EUROPE (French, German, etc.) ---
+        { id: 41, name: "Agnes Varda", nat: "France", era: "1950s-2010s", works: "Cleo from 5 to 7", region: "Europe", theme: "Feminism, French New Wave" },
+        { id: 42, name: "Jean-Luc Godard", nat: "France/Swiss", era: "1960s-2022", works: "Breathless", region: "Europe", theme: "Radicalism, Breaking the 4th wall" },
+        { id: 43, name: "Claire Denis", nat: "France", era: "1980s-Present", works: "Beau Travail", region: "Europe", theme: "Colonialism, The body" },
+        { id: 44, name: "Celine Sciamma", nat: "France", era: "2000s-Present", works: "Portrait of a Lady on Fire", region: "Europe", theme: "The Female Gaze, Queer identity" },
+        { id: 45, name: "Werner Herzog", nat: "Germany", era: "1960s-Present", works: "Aguirre, Fitzcarraldo", region: "Europe", theme: "Man vs Nature, Obsession" },
+        { id: 46, name: "Wim Wenders", nat: "Germany", era: "1970s-Present", works: "Wings of Desire, Paris Texas", region: "Europe", theme: "Wandering, Americana" },
+        { id: 47, name: "Rainer Werner Fassbinder", nat: "Germany", era: "1960s-1980s", works: "Ali: Fear Eats the Soul", region: "Europe", theme: "Social prejudice, Melodrama" },
+        { id: 48, name: "Christian Petzold", nat: "Germany", era: "1990s-Present", works: "Phoenix, Transit", region: "Europe", theme: "History, Ghostly identities" },
+        { id: 49, name: "Pedro Almodovar", nat: "Spain", era: "1980s-Present", works: "All About My Mother", region: "Europe", theme: "Desire, Mothers, Color" },
+        { id: 50, name: "Ingmar Bergman", nat: "Sweden", era: "1940s-2000s", works: "The Seventh Seal", region: "Europe", theme: "Faith, Death, Psychology" },
+        { id: 51, name: "Lars von Trier", nat: "Denmark", era: "1980s-Present", works: "Dogville, Melancholia", region: "Europe", theme: "Provocation, Depression" },
+        { id: 52, name: "Andrei Tarkovsky", nat: "USSR", era: "1960s-1980s", works: "Stalker, Mirror", region: "Europe", theme: "Time, Spirituality, Memory" },
+        
+        // --- AFRICA ---
+        { id: 61, name: "Ousmane Sembene", nat: "Senegal", era: "1960s-2000s", works: "Black Girl, Moolaade", region: "Africa", theme: "Father of African Cinema, Post-colonialism" },
+        { id: 62, name: "Djibril Diop Mambety", nat: "Senegal", era: "1970s-1990s", works: "Touki Bouki", region: "Africa", theme: "Avant-garde, Non-linear narrative" },
+        { id: 63, name: "Abderrahmane Sissako", nat: "Mauritania", era: "1990s-Present", works: "Timbuktu", region: "Africa", theme: "Islamic extremism, Beauty in pain" },
+        { id: 64, name: "Mati Diop", nat: "Senegal/France", era: "2010s-Present", works: "Atlantics", region: "Africa", theme: "Migration, Ghosts, Ocean" },
+        { id: 65, name: "Souleymane Cisse", nat: "Mali", era: "1970s-Present", works: "Yeelen", region: "Africa", theme: "African spirituality, Magic realism" },
+
+        // --- LATIN AMERICA ---
+        { id: 71, name: "Alfonso Cuaron", nat: "Mexico", era: "1990s-Present", works: "Roma, Children of Men", region: "Americas", theme: "Memory, Long takes, Class" },
+        { id: 72, name: "Guillermo del Toro", nat: "Mexico", era: "1990s-Present", works: "Pan's Labyrinth", region: "Americas", theme: "Monsters, Fascism, Fairy tales" },
+        { id: 73, name: "Lucrecia Martel", nat: "Argentina", era: "2000s-Present", works: "La Cienaga, Zama", region: "Americas", theme: "Decay of bourgeoisie, Soundscapes" },
+        { id: 74, name: "Fernando Meirelles", nat: "Brazil", era: "2000s-Present", works: "City of God", region: "Americas", theme: "Urban violence, Kinetic editing" },
+        { id: 75, name: "Alejandro G. Inarritu", nat: "Mexico", era: "2000s-Present", works: "Birdman, Amores Perros", region: "Americas", theme: "Interconnected lives, Survival" },
+
+        // --- USA / UK / GLOBAL ---
+        { id: 81, name: "Stanley Kubrick", nat: "USA/UK", era: "1950s-1999", works: "2001: A Space Odyssey", region: "Americas", theme: "Perfectionism, Coldness" },
+        { id: 82, name: "Alfred Hitchcock", nat: "UK/USA", era: "1920s-1970s", works: "Vertigo", region: "Europe", theme: "Suspense, Voyeurism" },
+        { id: 83, name: "Martin Scorsese", nat: "USA", era: "1970s-Present", works: "Taxi Driver", region: "Americas", theme: "Guilt, Crime, Faith" },
+        { id: 84, name: "Bong Joon-ho", nat: "S. Korea", era: "2000s-Present", works: "Parasite", region: "East Asia", theme: "Class war, Genre blending" },
+        { id: 85, name: "Park Chan-wook", nat: "S. Korea", era: "2000s-Present", works: "Oldboy", region: "East Asia", theme: "Revenge, Taboo" },
+        { id: 86, name: "Apichatpong Weerasethakul", nat: "Thailand", era: "2000s-Present", works: "Uncle Boonmee", region: "East Asia", theme: "Dreams, Reincarnation, Jungle" },
+        { id: 87, name: "Jane Campion", nat: "New Zealand", era: "1980s-Present", works: "The Piano", region: "Oceania", theme: "Female desire, Isolation" },
+        { id: 88, name: "George Miller", nat: "Australia", era: "1970s-Present", works: "Mad Max: Fury Road", region: "Oceania", theme: "Kinetic action, Myth making" },
+        { id: 89, name: "Jordan Peele", nat: "USA", era: "2010s-Present", works: "Get Out", region: "Americas", theme: "Social horror, Race" },
+        { id: 90, name: "Spike Lee", nat: "USA", era: "1980s-Present", works: "Do the Right Thing", region: "Americas", theme: "Race relations, Brooklyn" }
     ];
 
-    // Sort by debut year for timeline
-    directors.sort((a, b) => a.debutYear - b.debutYear);
-
     // --- DOM Elements ---
+    const timelineContent = document.getElementById('timeline-content');
+    const categoriesGrid = document.getElementById('categories-grid');
+    const searchInput = document.getElementById('search-input');
+    const modalOverlay = document.getElementById('director-modal');
+    const modalBody = document.getElementById('modal-body');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
     const tabs = document.querySelectorAll('.tab-btn');
     const views = document.querySelectorAll('.view');
-    const modalOverlay = document.getElementById('director-modal');
-    const modalCloseBtn = document.getElementById('modal-close-btn');
-    const modalBody = document.getElementById('modal-body');
 
-    // --- View Switching Logic ---
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            tabs.forEach(t => t.classList.remove('active'));
-            views.forEach(v => v.classList.remove('active'));
+    // --- RENDER FUNCTIONS ---
+    
+    // 1. Render Timeline (Grid of cards)
+    const renderTimeline = (data) => {
+        timelineContent.innerHTML = data.map(d => `
+            <div class="timeline-card" onclick="openModal(${d.id})">
+                <div class="card-meta">
+                    <span>${d.nat}</span>
+                    <span>${d.era.split('-')[0]}s</span>
+                </div>
+                <h3>${d.name}</h3>
+                <div style="font-size:0.9rem; color:#cbd5e1; margin-bottom:0.5rem;">${d.theme.split(',')[0]}</div>
+                <div class="card-works">Known for: ${d.works.split(',')[0]}</div>
+            </div>
+        `).join('');
+    };
 
-            tab.classList.add('active');
-            const viewId = tab.id.replace('-tab', '-view');
-            document.getElementById(viewId).classList.add('active');
+    // 2. Render Categories (Grouped by Region)
+    const renderCategories = (data) => {
+        const regions = [...new Set(data.map(d => d.region))].sort();
+        categoriesGrid.innerHTML = regions.map(reg => {
+            const dirs = data.filter(d => d.region === reg);
+            return `
+                <div class="category-group">
+                    <h3>${reg}</h3>
+                    ${dirs.map(d => `
+                        <div class="director-link" onclick="openModal(${d.id})">
+                            <span>${d.name}</span>
+                            <span class="nat">${d.nat}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }).join('');
+    };
 
-            if (viewId === 'graph-view') {
-                renderGraph();
-            }
+    // 3. Render Graph
+    const renderGraph = (data) => {
+        const container = document.getElementById('graph-container');
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        const svg = d3.select("#influence-graph");
+        svg.selectAll("*").remove();
+
+        // Create nodes grouped by Region
+        const nodes = data.map(d => ({ ...d }));
+        
+        // Simulation
+        const simulation = d3.forceSimulation(nodes)
+            .force("charge", d3.forceManyBody().strength(-30))
+            .force("collide", d3.forceCollide(15))
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("x", d3.forceX(width / 2).strength(0.05))
+            .force("y", d3.forceY(height / 2).strength(0.05));
+
+        const colorScale = d3.scaleOrdinal(d3.schemeSet3);
+
+        const node = svg.append("g")
+            .selectAll("circle")
+            .data(nodes)
+            .join("circle")
+            .attr("r", 6)
+            .attr("fill", d => colorScale(d.region))
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 1)
+            .call(d3.drag()
+                .on("start", (event, d) => {
+                    if (!event.active) simulation.alphaTarget(0.3).restart();
+                    d.fx = d.x; d.fy = d.y;
+                })
+                .on("drag", (event, d) => { d.fx = event.x; d.fy = event.y; })
+                .on("end", (event, d) => {
+                    if (!event.active) simulation.alphaTarget(0);
+                    d.fx = null; d.fy = null;
+                })
+            )
+            .on("click", (e, d) => openModal(d.id));
+
+        // Add tooltips or labels on hover could be added here
+        node.append("title").text(d => d.name + " (" + d.nat + ")");
+
+        simulation.on("tick", () => {
+            node.attr("cx", d => d.x).attr("cy", d => d.y);
         });
-    });
+    };
 
-    // --- Modal Logic ---
-    const openModal = (director) => {
+    // --- MODAL & SEARCH ---
+    window.openModal = (id) => {
+        const d = directors.find(x => x.id === id);
+        if(!d) return;
         modalBody.innerHTML = `
             <div class="modal-header">
-                <h2>${director.name}</h2>
-                <div class="modal-meta">${director.nationality} • ${director.activeEra}</div>
+                <h2>${d.name}</h2>
+                <div class="modal-badges">
+                    <span class="badge nat">${d.nat}</span>
+                    <span class="badge era">${d.region}</span>
+                    <span class="badge">${d.era}</span>
+                </div>
             </div>
-            <div class="modal-section">
-                <h4>Biography</h4>
-                <p>${director.bio}</p>
-            </div>
-            <div class="modal-section">
+            <div class="modal-body">
+                <h4>Major Works</h4>
+                <p>${d.works}</p>
                 <h4>Core Themes</h4>
-                <p>${director.themes}</p>
-            </div>
-            <div class="modal-section">
-                <h4>Key Works</h4>
-                <p>${director.works}</p>
-            </div>
-            <div class="modal-section">
-                <h4>Influenced By / Influenced</h4>
-                <p>${director.influence}</p>
-            </div>
-            <div style="margin-top: 2rem;">
-                <a href="${director.wiki}" target="_blank" style="color: var(--primary-color); text-decoration: none; border-bottom: 1px dotted;">Read Full Bio &rarr;</a>
+                <p>${d.theme}</p>
+                <div style="margin-top:2rem; font-size:0.9rem; color: var(--muted-text);">
+                    <a href="https://en.wikipedia.org/wiki/${d.name.replace(' ', '_')}" target="_blank" style="color:#38bdf8; text-decoration:none;">Read full biography on Wikipedia &rarr;</a>
+                </div>
             </div>
         `;
         modalOverlay.classList.add('show');
     };
 
-    const closeModal = () => {
-        modalOverlay.classList.remove('show');
-    };
+    modalCloseBtn.onclick = () => modalOverlay.classList.remove('show');
+    modalOverlay.onclick = (e) => { if(e.target === modalOverlay) modalOverlay.classList.remove('show'); };
 
-    modalCloseBtn.addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', (e) => {
-        if (e.target === modalOverlay) closeModal();
+    searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        const filtered = directors.filter(d => 
+            d.name.toLowerCase().includes(term) || 
+            d.nat.toLowerCase().includes(term) || 
+            d.region.toLowerCase().includes(term) ||
+            d.works.toLowerCase().includes(term)
+        );
+        renderTimeline(filtered);
+        renderCategories(filtered);
+        renderGraph(filtered); // Update graph dynamically
     });
 
-    // --- Render Timeline ---
-    const timelineContent = document.getElementById('timeline-content');
-    let lastDecade = 0;
-
-    timelineContent.innerHTML = directors.map((d, index) => {
-        const decade = Math.floor(d.debutYear / 10) * 10;
-        let decadeHeader = '';
-        
-        // Add a decade marker if it's a new decade
-        if (decade !== lastDecade) {
-            decadeHeader = `<div style="text-align:center; font-family:'Playfair Display'; font-size:2rem; color:#fff; margin: 40px 0 20px 0; opacity:0.3;">${decade}s</div>`;
-            lastDecade = decade;
-        }
-
-        const sideClass = index % 2 === 0 ? 'left' : 'right';
-        return `
-            ${decadeHeader}
-            <div class="timeline-item ${sideClass}">
-                <div class="timeline-card" data-id="${d.id}">
-                    <span class="timeline-year">${d.debutYear}</span>
-                    <h3>${d.name}</h3>
-                    <p style="color: var(--light-text-color); font-size: 0.9rem;">${d.works.split(',')[0]}</p>
-                </div>
-            </div>
-        `;
-    }).join('');
-
-    document.querySelectorAll('.timeline-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const dir = directors.find(d => d.id == card.dataset.id);
-            openModal(dir);
+    // --- TABS ---
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            views.forEach(v => v.classList.remove('active'));
+            tab.classList.add('active');
+            const viewId = tab.id.replace('-tab', '-view');
+            document.getElementById(viewId).classList.add('active');
+            if(viewId === 'graph-view') renderGraph(directors);
         });
     });
 
-    // --- Render Categories ---
-    const categoriesGrid = document.getElementById('categories-grid');
-    const categories = [...new Set(directors.map(d => d.category))];
-
-    categoriesGrid.innerHTML = categories.map(cat => {
-        const catDirectors = directors.filter(d => d.category === cat);
-        return `
-            <div class="category-card">
-                <h3>${cat}</h3>
-                <div>
-                    ${catDirectors.map(d => `
-                        <div class="director-list-item" data-id="${d.id}">
-                            <span>${d.name}</span>
-                            <span style="opacity:0.5; font-size:0.8em;">${d.debutYear}</span>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-        `;
-    }).join('');
-
-    document.querySelectorAll('.director-list-item').forEach(item => {
-        item.addEventListener('click', () => {
-            const dir = directors.find(d => d.id == item.dataset.id);
-            openModal(dir);
-        });
-    });
-
-    // --- Render Graph (D3.js) ---
-    const renderGraph = () => {
-        const container = document.getElementById('graph-container');
-        if (container.querySelector('svg g')) return; // Prevent re-rendering
-
-        const width = container.clientWidth;
-        const height = container.clientHeight;
-
-        const nodes = directors.map(d => ({ id: d.id, name: d.name, category: d.category }));
-        const links = [];
-
-        // Helper: Find ID by partial name
-        const findID = (name) => {
-            const n = name.trim().toLowerCase();
-            const found = directors.find(d => d.name.toLowerCase().includes(n) || n.includes(d.name.toLowerCase()));
-            return found ? found.id : null;
-        };
-
-        // Create Links
-        directors.forEach(d => {
-            if (d.influence) {
-                d.influence.split(',').forEach(inf => {
-                    const target = findID(inf);
-                    if (target && target !== d.id) {
-                        links.push({ source: target, target: d.id }); // Source influenced Target
-                    }
-                });
-            }
-        });
-
-        const svg = d3.select("#influence-graph");
-        svg.selectAll("*").remove();
-
-        // Arrow Marker
-        svg.append('defs').append('marker')
-            .attr('id', 'arrow')
-            .attr('viewBox', '0 -5 10 10')
-            .attr('refX', 18)
-            .attr('refY', 0)
-            .attr('markerWidth', 6)
-            .attr('markerHeight', 6)
-            .attr('orient', 'auto')
-            .append('path')
-            .attr('d', 'M0,-5L10,0L0,5')
-            .attr('fill', '#94a3b8');
-
-        const simulation = d3.forceSimulation(nodes)
-            .force("link", d3.forceLink(links).id(d => d.id).distance(120))
-            .force("charge", d3.forceManyBody().strength(-300))
-            .force("center", d3.forceCenter(width / 2, height / 2))
-            .force("collide", d3.forceCollide().radius(30));
-
-        const link = svg.append("g")
-            .attr("stroke", "#94a3b8")
-            .attr("stroke-opacity", 0.3)
-            .selectAll("line")
-            .data(links)
-            .join("line")
-            .attr("marker-end", "url(#arrow)");
-
-        // Color scale
-        const color = d3.scaleOrdinal(d3.schemeSet3);
-
-        const node = svg.append("g")
-            .selectAll("g")
-            .data(nodes)
-            .join("g")
-            .attr("class", "node")
-            .call(drag(simulation));
-
-        node.append("circle")
-            .attr("r", 8)
-            .attr("fill", d => color(d.category))
-            .on("click", (e, d) => {
-                const dir = directors.find(x => x.id === d.id);
-                openModal(dir);
-            });
-
-        node.append("text")
-            .text(d => d.name)
-            .attr("x", 12)
-            .attr("y", 3);
-
-        simulation.on("tick", () => {
-            link
-                .attr("x1", d => d.source.x)
-                .attr("y1", d => d.source.y)
-                .attr("x2", d => d.target.x)
-                .attr("y2", d => d.target.y);
-
-            node.attr("transform", d => `translate(${d.x},${d.y})`);
-        });
-
-        function drag(sim) {
-            return d3.drag()
-                .on("start", (e, d) => {
-                    if (!e.active) sim.alphaTarget(0.3).restart();
-                    d.fx = d.x; d.fy = d.y;
-                })
-                .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; })
-                .on("end", (e, d) => {
-                    if (!e.active) sim.alphaTarget(0);
-                    d.fx = null; d.fy = null;
-                });
-        }
-    };
+    // --- INITIAL RENDER ---
+    renderTimeline(directors);
+    renderCategories(directors);
 });
